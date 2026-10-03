@@ -2,12 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Luxury Furniture | Guru Vashishta Woods</title>
     <link rel="icon" type="image/png" href="images/logo.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Security & Privacy Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://wa.me; frame-ancestors 'none'; form-action 'self' https://formsubmit.co;">
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,16 +28,18 @@
     <!-- Header -->
     <header class="scrolled">
         <div class="container nav-container">
-            <a href="index.html" class="logo"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo"></a>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo" aria-label="Guru Vashishta Woods Home">
+                <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
+                <a href="handicraft.html">Handicraft</a>
                 <a href="furniture.html" class="active">Furniture</a>
-                <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Reach Us</a>
             </nav>
         </div>
     </header>
@@ -32,81 +47,175 @@
     <!-- Page Header -->
     <div class="page-header">
         <div class="container reveal">
+            <div class="brand-badge">
+                <i class="fas fa-couch"></i> Bespoke Atelier
+            </div>
             <h1 class="hero-title" style="font-size: 3rem;">Custom <span>Furniture</span></h1>
-            <p style="color: var(--color-primary); letter-spacing: 2px; text-transform: uppercase;">Handcrafted for Home & Office</p>
+            <p style="color: var(--color-leaf-light); letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Handicrafts for Home & Office</p>
         </div>
     </div>
 
-    <!-- Products Gallery -->
-    <section>
+    <!-- Products Gallery & Catalog Section -->
+    <section class="bg-alabaster">
         <div class="container">
+            
+            <!-- Dynamic Catalog Toolbar: Category Filter & Live Search -->
+            <div class="catalog-toolbar reveal">
+                <div class="filter-pills">
+                    <button class="filter-btn active" data-filter="all"><i class="fas fa-th-large"></i> All Pieces</button>
+                    <button class="filter-btn" data-filter="bedroom"><i class="fas fa-bed"></i> Bedroom</button>
+                    <button class="filter-btn" data-filter="living"><i class="fas fa-couch"></i> Living Room</button>
+                    <button class="filter-btn" data-filter="dining"><i class="fas fa-utensils"></i> Dining</button>
+                    <button class="filter-btn" data-filter="office"><i class="fas fa-briefcase"></i> Office</button>
+                </div>
+                
+                <div class="search-box-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search furniture by name or style...">
+                </div>
+
+                <div class="search-count-badge">
+                    <span id="productCount">6</span> Masterpieces Available
+                </div>
+            </div>
+
+            <!-- Products Grid -->
             <div class="gallery-grid">
                 
-                <!-- Product 1 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/bed.jpg" -->
-                    <img src="images/bed_img.png" alt="Luxury Cot">
+                <!-- Product 1: Luxury King Bedroom Set -->
+                <div class="gallery-item reveal" data-category="bedroom">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-bed"></i> Bedroom Suite</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Luxury%20King%20Bedroom%20Set." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/bed_img.png" alt="Luxury Cot" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Luxury King Bedroom Set</h3>
                         <p>Antique Finish with Premium Wood</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> 100% FSC Teak</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Product 2 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/chair.jpg" -->
-                    <img src="images/mirror_img.png" alt="Stylish Chair">
+                <!-- Product 2: Stylish Lounge Chair -->
+                <div class="gallery-item reveal" data-category="living">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-couch"></i> Living & Lounge</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Stylish%20Lounge%20Chair." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/mirror_img.png" alt="Stylish Chair" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Stylish Lounge Chair</h3>
                         <p>Comfort meets luxury design</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Ergonomic Timber</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Product 3 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/dining.jpg" -->
-                    <img src="images/glass_table.png" alt="Glass Coffee Table">
+                <!-- Product 3: 6 Seater Glass Coffee Table -->
+                <div class="gallery-item reveal" data-category="dining living">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-utensils"></i> Dining & Coffee</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%206%20Seater%20Glass%20Coffee%20Table." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/glass_table.png" alt="Glass Coffee Table" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>6 Seater Glass Coffee Table</h3>
-                        <p>Custom Handcrafted Elegance</p>
+                        <p>Custom Handicraft Elegance</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-gem"></i> Tempered Glass & Teak</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Product 4 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/office.jpg" -->
-                    <img src="images/solid_table.png" alt="Solid Wood Coffee Table">
+                <!-- Product 4: Executive Office Desk -->
+                <div class="gallery-item reveal" data-category="office">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-briefcase"></i> Executive Workspace</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Executive%20Office%20Desk." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/solid_table.png" alt="Solid Wood Coffee Table" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Executive Office Desk</h3>
                         <p>Premium workspace solutions</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Solid Hardwood</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Product 5 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/corner.jpg" -->
-                    <img src="images/decor_img.png" alt="Corner Stand">
+                <!-- Product 5: Decorative Corner Stand -->
+                <div class="gallery-item reveal" data-category="living">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-leaf"></i> Accent Stand</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Decorative%20Corner%20Stand." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/decor_img.png" alt="Corner Stand" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Decorative Corner Stand</h3>
                         <p>Maximize space with luxury</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Hand Turned Accents</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Product 6 -->
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/wardrobe.jpg" -->
-                    <img src="images/wardrobe_img.png" alt="Wardrobe">
+                <!-- Product 6: Custom Wardrobe -->
+                <div class="gallery-item reveal" data-category="bedroom">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-door-closed"></i> Storage & Wardrobes</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Custom%20Wardrobe." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/wardrobe_img.png" alt="Wardrobe" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Custom Wardrobe</h3>
                         <p>Spacious, elegant, durable</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Kiln-Dried Hardwood</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
                     </div>
                 </div>
 
             </div>
             
-            <div class="text-center" style="margin-top: 4rem;">
-                <p style="margin-bottom: 2rem;">Don't see what you're looking for? We build fully customized solutions tailored to your exact needs.</p>
-                <a href="contact.html" class="btn btn-primary">Request Custom Design</a>
+            <!-- Custom Design Callout -->
+            <div class="text-center reveal bg-travertine" style="margin-top: 5rem; padding: 3.5rem 2rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                <span class="section-subtitle">Tailored Architectural Craft</span>
+                <p style="margin-bottom: 2rem; font-size: 1.15rem; max-width: 700px; margin-left: auto; margin-right: auto;">Don't see what you're looking for? We build fully customized solutions tailored to your exact needs.</p>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-drafting-compass"></i> Request Custom Design
+                    </a>
+                    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20need%20a%20fully%20customized%20furniture%20design." target="_blank" rel="noopener noreferrer" class="btn">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Consultation
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -116,38 +225,40 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo"></a>
-                    <p style="color: var(--color-text-muted); max-width: 300px;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo">
+                    </a>
+                    <p style="color: var(--color-text-muted); max-width: 320px; font-size: 0.95rem; line-height: 1.7;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About Us</a>
-                        <a href="furniture.html">Furniture</a>
-                        <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                        <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="handicraft.html"><i class="fas fa-chevron-right"></i> Handicraft</a>
+                        <a href="furniture.html"><i class="fas fa-chevron-right"></i> Furniture</a>
+                        <a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="contact.html"><i class="fas fa-chevron-right"></i> Reach Us</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
                     <div class="footer-links">
-                        <a href="furniture.html">Living Room</a>
-                        <a href="furniture.html">Bedroom</a>
-                        <a href="furniture.html">Office</a>
-                        <a href="furniture.html">Dining</a>
+                        <a href="furniture.html"><i class="fas fa-couch"></i> Living Room</a>
+                        <a href="furniture.html"><i class="fas fa-bed"></i> Bedroom</a>
+                        <a href="furniture.html"><i class="fas fa-briefcase"></i> Office</a>
+                        <a href="furniture.html"><i class="fas fa-utensils"></i> Dining</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <div class="footer-links">
-                        <a href="tel:+919519466611"><i class="fas fa-phone"></i> +91-9519466611</a>
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
                         <a href="mailto:guruvashishtawoods@gmail.com"><i class="fas fa-envelope"></i> guruvashishtawoods@gmail.com</a>
                         <a href="#"><i class="fas fa-map-marker-alt"></i> 1 Dahami Kalan, Bagru, Jaipur Pin Code - 303007</a>
                     </div>
@@ -158,6 +269,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20inquire%20about%20your%20furniture%20collection." 
+       class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-tooltip">Chat with Artisan &bull; Jaipur</span>
+        <div class="whatsapp-pulse-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 
     <script src="js/main.js"></script>
 </body>

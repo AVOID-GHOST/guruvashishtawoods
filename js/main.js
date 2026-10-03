@@ -1,80 +1,553 @@
+/**
+ * Guru Vashishta Woods - Dynamic Interactivity & UI Engine
+ * Features: Live Filter & Search, Quick View Modal, Bespoke Configurator,
+ * Scroll Animations, WhatsApp Integration, Animated Counters, and URL Pre-filling.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Menu Toggle
+    initHeaderAndNav();
+    initScrollReveal();
+    initAnimatedCounters();
+    initCatalogFilterAndSearch();
+    initQuickViewModal();
+    initConfigurator();
+    initBackToTop();
+    initContactFormPreFill();
+    initFormSecurity();
+    initParallax();
+});
+
+/* ==========================================================================
+   Header & Mobile Navigation
+   ========================================================================== */
+function initHeaderAndNav() {
+    const header = document.querySelector('header');
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
-    if (mobileBtn) {
-        mobileBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    // Header scroll background toggle
+    const handleScroll = () => {
+        if (window.scrollY > 40) {
+            header?.classList.add('scrolled');
+        } else {
+            header?.classList.remove('scrolled');
+        }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Mobile drawer toggle
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = navLinks.classList.toggle('active');
             const icon = mobileBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+            if (icon) {
+                icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
             }
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close on window resize if expanded past mobile breakpoint
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
+            }
+        }, { passive: true });
+    }
+}
+
+/* ==========================================================================
+   High Performance Scroll Reveal via IntersectionObserver
+   ========================================================================== */
+function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px 0px -60px 0px',
+            threshold: 0.15
+        });
+
+        reveals.forEach(el => observer.observe(el));
+    } else {
+        // Fallback for older browsers
+        reveals.forEach(el => el.classList.add('active'));
+    }
+}
+
+/* ==========================================================================
+   Animated Number Counters (e.g. 100% In-House, 100% FSC, 100% Commitment)
+   ========================================================================== */
+function initAnimatedCounters() {
+    const statCards = document.querySelectorAll('.stat-num, .counter-num');
+    if (!statCards.length) return;
+
+    const animateCount = (el) => {
+        const target = parseInt(el.getAttribute('data-target') || el.innerText.replace(/\D/g, ''), 10) || 100;
+        const suffix = el.getAttribute('data-suffix') || '%';
+        const duration = 1800;
+        const start = performance.now();
+
+        const update = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            // EaseOutExpo
+            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const current = Math.floor(ease * target);
+            el.innerText = `${current}${suffix}`;
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = `${target}${suffix}`;
+            }
+        };
+        requestAnimationFrame(update);
+    };
+
+    if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCount(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        statCards.forEach(card => obs.observe(card));
+    } else {
+        statCards.forEach(card => animateCount(card));
+    }
+}
+
+/* ==========================================================================
+   Live Search & Dynamic Category Filter for Products / Gallery
+   ========================================================================== */
+function initCatalogFilterAndSearch() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.querySelector('.search-input');
+    const galleryItems = document.querySelectorAll('.gallery-grid .gallery-item');
+    const countBadge = document.getElementById('productCount');
+
+    if (!galleryItems.length) return;
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    const applyFilters = () => {
+        let visibleCount = 0;
+
+        galleryItems.forEach(item => {
+            const itemCat = (item.getAttribute('data-category') || '').toLowerCase();
+            const titleEl = item.querySelector('h3');
+            const descEl = item.querySelector('p');
+            const itemText = `${titleEl?.innerText || ''} ${descEl?.innerText || ''}`.toLowerCase();
+
+            const matchesCategory = activeCategory === 'all' || itemCat.includes(activeCategory);
+            const matchesSearch = !searchQuery || itemText.includes(searchQuery);
+
+            if (matchesCategory && matchesSearch) {
+                item.style.display = '';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0) scale(1)';
+                }, 10);
+                visibleCount++;
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.96)';
+                setTimeout(() => {
+                    if (item.style.opacity === '0') item.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        if (countBadge) {
+            countBadge.innerText = `${visibleCount}`;
+        }
+    };
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCategory = btn.getAttribute('data-filter') || 'all';
+            applyFilters();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim().toLowerCase();
+            applyFilters();
         });
     }
+}
 
-    // Sticky Header
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+/* ==========================================================================
+   Interactive Dynamic Product Quick View Modal
+   ========================================================================== */
+function initQuickViewModal() {
+    // Ensure modal HTML exists in DOM
+    let modalBackdrop = document.querySelector('.modal-backdrop');
+    if (!modalBackdrop) {
+        modalBackdrop = document.createElement('div');
+        modalBackdrop.className = 'modal-backdrop';
+        modalBackdrop.innerHTML = `
+            <div class="modal-content" role="dialog" aria-modal="true">
+                <button class="modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+                <div class="modal-body">
+                    <div class="modal-image-col">
+                        <img src="" alt="Product Preview" id="modalProductImg">
+                    </div>
+                    <div class="modal-details-col">
+                        <span class="modal-category-tag" id="modalCategory">Handcrafted Solid Wood</span>
+                        <h2 id="modalTitle">Product Title</h2>
+                        <div class="modal-subtitle" id="modalSubtitle">Subheading</div>
+                        <p class="modal-description" id="modalDesc">Product description will be shown here.</p>
+                        
+                        <div class="modal-specs-box">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> <span>100% FSC-Certified Seasoned Wood</span></li>
+                                <li><i class="fas fa-hammer"></i> <span>Artisanal Hand-Carved Joinery</span></li>
+                                <li><i class="fas fa-layer-group"></i> <span>Customizable Sizing & Finishes</span></li>
+                                <li><i class="fas fa-map-marker-alt"></i> <span>Jaipur Workshop Direct Manufacturing</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-finishes-title">Select Handcrafted Finish:</div>
+                        <div class="modal-finishes-list">
+                            <span class="finish-chip active" data-finish="Solid Teak (Natural)">Solid Teak</span>
+                            <span class="finish-chip" data-finish="Imperial Sheesham">Sheesham</span>
+                            <span class="finish-chip" data-finish="American Walnut">Walnut</span>
+                            <span class="finish-chip" data-finish="Antique Honey">Antique Finish</span>
+                        </div>
+
+                        <div class="modal-action-row">
+                            <a href="#" class="btn btn-primary" id="modalWhatsAppBtn" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp"></i> Inquire via WhatsApp
+                            </a>
+                            <a href="contact.html" class="btn" id="modalQuoteBtn">
+                                Request Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modalBackdrop);
+    }
+
+    const modalImg = modalBackdrop.querySelector('#modalProductImg');
+    const modalTitle = modalBackdrop.querySelector('#modalTitle');
+    const modalSubtitle = modalBackdrop.querySelector('#modalSubtitle');
+    const modalDesc = modalBackdrop.querySelector('#modalDesc');
+    const modalCategory = modalBackdrop.querySelector('#modalCategory');
+    const modalWhatsAppBtn = modalBackdrop.querySelector('#modalWhatsAppBtn');
+    const modalQuoteBtn = modalBackdrop.querySelector('#modalQuoteBtn');
+    const closeBtn = modalBackdrop.querySelector('.modal-close-btn');
+    const finishChips = modalBackdrop.querySelectorAll('.finish-chip');
+
+    let currentTitle = '';
+    let currentFinish = 'Solid Teak (Natural)';
+
+    const updateWhatsAppLink = () => {
+        if (!modalWhatsAppBtn) return;
+        const msg = encodeURIComponent(`Hello Guru Vashishta Woods! I am interested in customizing the "${currentTitle}" with ${currentFinish} wood finish. Please share details and bespoke pricing.`);
+        modalWhatsAppBtn.href = `https://wa.me/919519766601?text=${msg}`;
+    };
+
+    finishChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            finishChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            currentFinish = chip.getAttribute('data-finish') || 'Solid Teak';
+            updateWhatsAppLink();
+        });
+    });
+
+    const openModal = (card) => {
+        const img = card.querySelector('img')?.src || '';
+        const title = card.querySelector('h3')?.innerText || 'Handmade Furniture';
+        const subtitle = card.querySelector('.gallery-overlay p')?.innerText || 'Antique Finish with Premium Wood';
+        const category = card.getAttribute('data-category') || 'Luxury Furniture';
+
+        currentTitle = title;
+        if (modalImg) modalImg.src = img;
+        if (modalTitle) modalTitle.innerText = title;
+        if (modalSubtitle) modalSubtitle.innerText = subtitle;
+        if (modalDesc) modalDesc.innerText = `Every piece of the ${title} is 100% handcrafted in our Jaipur workshop by master artisans using seasoned, sustainably harvested wood for timeless durability.`;
+        if (modalCategory) modalCategory.innerText = category;
+        if (modalQuoteBtn) modalQuoteBtn.href = `contact.html?product=${encodeURIComponent(title)}`;
+
+        updateWhatsAppLink();
+
+        modalBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        modalBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+            closeModal();
         }
     });
 
-    // Scroll Reveal Animations with Staggering
-    const reveals = document.querySelectorAll('.reveal');
-
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        const elementVisible = 100;
+    // Attach click listeners to cards and quick-action triggers
+    document.querySelectorAll('.gallery-item').forEach(card => {
+        const quickViewBtn = card.querySelector('.btn-quick-view') || card.querySelector('.action-circle-btn');
+        if (quickViewBtn) {
+            quickViewBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openModal(card);
+            });
+        }
         
-        let delayCounter = 0;
+        // Clicking image directly also opens quick view
+        const img = card.querySelector('img');
+        if (img) {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => openModal(card));
+        }
+    });
+}
 
-        reveals.forEach((reveal) => {
-            const elementTop = reveal.getBoundingClientRect().top;
-            if (elementTop < windowHeight - elementVisible) {
-                if (!reveal.classList.contains('active')) {
-                    // Stagger elements in a grid
-                    if (reveal.closest('.gallery-grid') || reveal.closest('.features-grid')) {
-                        reveal.style.transitionDelay = `${delayCounter * 0.15}s`;
-                        delayCounter++;
-                        // Reset counter after a short delay
-                        setTimeout(() => { delayCounter = 0; }, 500);
-                    }
-                    reveal.classList.add('active');
-                }
-            }
+/* ==========================================================================
+   Interactive Bespoke Furniture Configurator & Live Estimator
+   ========================================================================== */
+function initConfigurator() {
+    const configurator = document.querySelector('.configurator-wrapper');
+    if (!configurator) return;
+
+    let selectedSpace = 'Living Room';
+    let selectedWood = '100% FSC Teak Wood';
+    let selectedFinish = 'Natural Matte Oil';
+    let selectedScale = 'Standard Residential';
+
+    const spaceChips = configurator.querySelectorAll('[data-step="space"] .config-chip');
+    const woodChips = configurator.querySelectorAll('[data-step="wood"] .config-chip');
+    const finishChips = configurator.querySelectorAll('[data-step="finish"] .config-chip');
+    const scaleChips = configurator.querySelectorAll('[data-step="scale"] .config-chip');
+
+    const summarySpace = document.getElementById('summarySpace');
+    const summaryWood = document.getElementById('summaryWood');
+    const summaryFinish = document.getElementById('summaryFinish');
+    const summaryScale = document.getElementById('summaryScale');
+    const configWhatsAppBtn = document.getElementById('configWhatsAppBtn');
+    const configQuoteBtn = document.getElementById('configQuoteBtn');
+
+    const updateSummary = () => {
+        if (summarySpace) summarySpace.innerText = selectedSpace;
+        if (summaryWood) summaryWood.innerText = selectedWood;
+        if (summaryFinish) summaryFinish.innerText = selectedFinish;
+        if (summaryScale) summaryScale.innerText = selectedScale;
+
+        const specText = `${selectedSpace} custom piece in ${selectedWood} with ${selectedFinish} (${selectedScale})`;
+        
+        if (configWhatsAppBtn) {
+            const msg = encodeURIComponent(`Hello Guru Vashishta Woods! I configured a bespoke piece:
+- Category: ${selectedSpace}
+- Wood Type: ${selectedWood}
+- Finish: ${selectedFinish}
+- Requirement Scale: ${selectedScale}
+Please advise on timeline and quotation.`);
+            configWhatsAppBtn.href = `https://wa.me/919519766601?text=${msg}`;
+        }
+
+        if (configQuoteBtn) {
+            configQuoteBtn.href = `contact.html?spec=${encodeURIComponent(specText)}`;
+        }
+    };
+
+    const attachChipListeners = (chips, callback) => {
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                callback(chip.innerText.trim());
+                updateSummary();
+            });
         });
     };
 
-    // Hero Parallax Effect
-    const heroBg = document.querySelector('.hero-bg');
-    
-    const parallaxScroll = () => {
-        if (heroBg) {
-            const scrollPos = window.scrollY;
-            heroBg.style.transform = `translateY(${scrollPos * 0.4}px) scale(1.05)`;
-        }
-    };
+    attachChipListeners(spaceChips, val => { selectedSpace = val; });
+    attachChipListeners(woodChips, val => { selectedWood = val; });
+    attachChipListeners(finishChips, val => { selectedFinish = val; });
+    attachChipListeners(scaleChips, val => { selectedScale = val; });
+
+    updateSummary();
+}
+
+/* ==========================================================================
+   Back to Top Floating Button
+   ========================================================================== */
+function initBackToTop() {
+    let btn = document.querySelector('.back-to-top');
+    if (!btn) {
+        btn = document.createElement('button');
+        btn.className = 'back-to-top';
+        btn.setAttribute('aria-label', 'Back to top');
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        document.body.appendChild(btn);
+    }
 
     window.addEventListener('scroll', () => {
-        revealOnScroll();
-        parallaxScroll();
+        if (window.scrollY > 350) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    
-    // Trigger on load
-    setTimeout(revealOnScroll, 100);
-});
+}
 
+/* ==========================================================================
+   Input Sanitization & Security Helper
+   ========================================================================== */
+function sanitizeSafeText(str, maxLength = 200) {
+    if (!str || typeof str !== 'string') return '';
+    return str
+        .replace(/<[^>]*>?/gm, '') // Strip HTML tags
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Strip control chars
+        .replace(/[<>"'`]/g, '') // Strip injection characters
+        .trim()
+        .slice(0, maxLength);
+}
 
-// Clean URL extensions dynamically
-if (window.location.pathname.endsWith('.html')) {
-    let cleanUrl = window.location.pathname.replace('/index.html', '/').replace('.html', '');
-    window.history.replaceState(null, '', cleanUrl);
+/* ==========================================================================
+   Contact Page Auto-Fill from URL Parameters (Sanitized & Secure)
+   ========================================================================== */
+function initContactFormPreFill() {
+    const messageInput = document.querySelector('textarea[name="Message"]');
+    if (!messageInput) return;
+
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productParam = urlParams.get('product');
+        const specParam = urlParams.get('spec');
+
+        if (productParam) {
+            const cleanProduct = sanitizeSafeText(decodeURIComponent(productParam), 120);
+            if (cleanProduct) {
+                messageInput.value = `Hello Guru Vashishta Woods,\n\nI am inquiring about the "${cleanProduct}". Please provide customization details, wood options, and pricing information.`;
+            }
+        } else if (specParam) {
+            const cleanSpec = sanitizeSafeText(decodeURIComponent(specParam), 250);
+            if (cleanSpec) {
+                messageInput.value = `Hello Guru Vashishta Woods,\n\nI would like a custom quote for the following bespoke configuration:\n${cleanSpec}\n\nPlease share manufacturing lead time and pricing.`;
+            }
+        }
+    } catch (e) {
+        console.warn('URL parameter safe parsing caught: ', e);
+    }
+}
+
+/* ==========================================================================
+   Form Security & Anti-Bot Honeypot Defense
+   ========================================================================== */
+function initFormSecurity() {
+    const forms = document.querySelectorAll('form[action*="formsubmit.co"]');
+    forms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            // Check honeypot field
+            const honey = form.querySelector('input[name="_honey"]');
+            if (honey && honey.value.trim() !== '') {
+                // Automated bot trapped in honeypot! Intercept silently.
+                e.preventDefault();
+                return false;
+            }
+
+            // Input sanitization and validation
+            const nameInput = form.querySelector('input[name="Name"]');
+            const emailInput = form.querySelector('input[name="Email"]');
+            const phoneInput = form.querySelector('input[name="Phone"]');
+            const msgInput = form.querySelector('textarea[name="Message"]');
+
+            if (nameInput) nameInput.value = sanitizeSafeText(nameInput.value, 100);
+            if (emailInput) emailInput.value = emailInput.value.trim().slice(0, 120);
+            if (phoneInput) phoneInput.value = phoneInput.value.trim().slice(0, 25);
+            
+            if (msgInput) {
+                // Block script tag injections
+                if (/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi.test(msgInput.value)) {
+                    e.preventDefault();
+                    alert('Invalid input detected. Please remove script tags.');
+                    return false;
+                }
+            }
+
+            // Prevent double submits / rapid clicking
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+                // Timeout safeguard in case submission is cancelled or fails
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }, 8000);
+            }
+        });
+    });
+}
+
+/* ==========================================================================
+   Hero Subtle Parallax Effect (Optimized with Passive Listener)
+   ========================================================================== */
+function initParallax() {
+    const heroBg = document.querySelector('.hero-bg');
+    if (!heroBg) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+            heroBg.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0) scale(1.05)`;
+        }
+    }, { passive: true });
 }

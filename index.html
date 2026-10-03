@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Guru Vashishta Woods | Luxury Furniture Manufacturing</title>
     <link rel="icon" type="image/png" href="images/logo.png">
 
-    
-    <!-- Google Fonts -->
+    <!-- Security & Privacy Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://wa.me; frame-ancestors 'none'; form-action 'self' https://formsubmit.co;">
+
+    <!-- Google Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -23,77 +28,173 @@
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <a href="index.html" class="logo"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo"></a>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo" aria-label="Guru Vashishta Woods Home">
+                <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav class="nav-links">
                 <a href="index.html" class="active">Home</a>
-                <a href="about.html">About Us</a>
+                <a href="handicraft.html">Handicraft</a>
                 <a href="furniture.html">Furniture</a>
-                <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Reach Us</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Atmospheric Glow Centered Hero) -->
     <section class="hero">
-        <!-- USER TO REPLACE IMAGE: src="images/hero-bg.jpg" -->
-        <img src="images/hero_bg.png" alt="Luxury Furniture Manufacturing" class="hero-bg">
+        <img src="images/hero_bg_light.jpg" alt="Luxury Furniture Manufacturing" class="hero-bg">
+        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content reveal">
-                <span class="hero-subtitle">Premium Craftsmanship</span>
-                <h1 class="hero-title">Elevate Your Space with <span>Custom</span> Furniture.</h1>
-                <p class="hero-text">We provide handmade, fully customized furniture designed to meet the exact requirements of your home or office. Crafted in Jaipur, delivered globally.</p>
-                <a href="furniture.html" class="btn btn-primary">Explore Collection</a>
-                <a href="contact.html" class="btn">Contact Us</a>
+                <!-- Centered Top Pill Badge -->
+                <div class="hero-pill-badge">
+                    <i class="fas fa-leaf"></i> Premium Craftsmanship &bull; Jaipur Atelier
+                </div>
+
+                <!-- Centered Multi-line Headline with Glowing Green Highlight -->
+                <h1 class="hero-title centered">
+                    Make Your Surroundings<br>
+                    More Natural with<br>
+                    <span class="hero-glow-green">Wooden Handicrafts</span>.
+                </h1>
+
+                <!-- Centered Subtitle Paragraph -->
+                <p class="hero-text centered">
+                    We provide handmade, fully customized furniture designed to meet the exact requirements of your home or office. Crafted in Jaipur, delivered globally.
+                </p>
+
+                <!-- Featured Categories: Handicraft Items, Furniture, Storage Utilities, Custom -->
+                <div class="hero-categories-grid">
+                    <a href="handicraft.html" class="hero-category-card">
+                        <div class="cat-card-icon"><i class="fas fa-feather-alt"></i></div>
+                        <div class="cat-card-text">
+                            <h3>Handicraft Items</h3>
+                            <p>Hand-carved decor, cutting boards & mirror frames</p>
+                        </div>
+                        <span class="cat-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="furniture.html" class="hero-category-card">
+                        <div class="cat-card-icon"><i class="fas fa-couch"></i></div>
+                        <div class="cat-card-text">
+                            <h3>Furniture</h3>
+                            <p>Luxury bedroom suites, lounge chairs & coffee tables</p>
+                        </div>
+                        <span class="cat-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="furniture.html?category=bedroom" class="hero-category-card">
+                        <div class="cat-card-icon"><i class="fas fa-door-closed"></i></div>
+                        <div class="cat-card-text">
+                            <h3>Storage Utilities</h3>
+                            <p>Custom wardrobes, executive desks & corner stands</p>
+                        </div>
+                        <span class="cat-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="contact.html" class="hero-category-card">
+                        <div class="cat-card-icon"><i class="fas fa-drafting-compass"></i></div>
+                        <div class="cat-card-text">
+                            <h3>Custom</h3>
+                            <p>Tailored architectural designs built to your exact specs</p>
+                        </div>
+                        <span class="cat-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+
+                <!-- Centered Action Buttons (Bright Pill + Glass Pill) -->
+                <div class="hero-btn-group centered">
+                    <a href="furniture.html" class="btn btn-hero-bright">
+                        Explore Collection <i class="fas fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-hero-glass">
+                        <i class="fas fa-envelope"></i> Reach Us
+                    </a>
+                </div>
+
+                <!-- Centered Trust Checkmarks Bar -->
+                <div class="hero-trust-bar">
+                    <span class="trust-pill"><i class="fas fa-check"></i> 100% In-House Atelier</span>
+                    <span class="trust-sep">|</span>
+                    <span class="trust-pill"><i class="fas fa-check"></i> 100% FSC Certified Wood</span>
+                    <span class="trust-sep">|</span>
+                    <span class="trust-pill"><i class="fas fa-check"></i> Crafted in Jaipur</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="bg-surface">
+    <section class="bg-sage">
         <div class="container about-grid">
             <div class="about-image reveal">
-                <!-- USER TO REPLACE IMAGE: src="images/about.jpg" -->
-                <img src="images/office_img.png" alt="Guru Vashishta Woods Workshop">
+                <div class="about-image-wrapper">
+                    <img src="images/office_img.png" alt="Guru Vashishta Woods Workshop" loading="lazy" decoding="async">
+                </div>
+                <div class="about-image-backdrop"></div>
+                <div class="about-image-floating-badge">
+                    <div class="badge-icon"><i class="fas fa-medal"></i></div>
+                    <div class="badge-text">
+                        <h4>Jaipur Heritage</h4>
+                        <p>Authentic Wood Artistry</p>
+                    </div>
+                </div>
             </div>
             <div class="about-text reveal">
                 <span class="hero-subtitle">About Us</span>
                 <h2>Mastering the Art of Wood.</h2>
+                <div class="section-divider left"></div>
                 <p>Guru Vashishta Woods Pvt. Ltd is a premier home and office furniture manufacturing company based in Jaipur, Rajasthan. We specialize in handmade, custom crafts that transform spaces.</p>
                 <p>Our mission is to create and design world-class furniture by working artistically, reducing costs, and continuously improving our services. We justify our business by adding undeniable value to our designs for our esteemed customers.</p>
                 <br>
-                <a href="about.html" class="btn">Read More</a>
+                <a href="about.html" class="btn">
+                    <span>Read More</span> <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us -->
-    <section>
+    <section class="bg-alabaster">
         <div class="container text-center reveal">
-            <h2>Why Choose Us</h2>
-            <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Dedicated to providing the finest quality materials and prompt responses to all our client's needs.</p>
+            <span class="section-subtitle">Our Distinctions</span>
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="section-divider"></div>
+            <p style="color: var(--color-text-muted); max-width: 650px; margin: 0 auto 3rem; font-size: 1.05rem;">Dedicated to providing the finest quality materials and prompt responses to all our client's needs.</p>
             
             <div class="features-grid">
                 <div class="feature-card reveal">
-                    <i class="fas fa-industry feature-icon"></i>
-                    <h3>100% In-House</h3>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-industry feature-icon"></i>
+                    </div>
+                    <h3 class="stat-num" data-target="100" data-suffix="%">100% In-House</h3>
                     <p>From design to manufacturing, our dedicated team handles everything under one roof.</p>
                 </div>
+
                 <div class="feature-card reveal">
-                    <i class="fas fa-tree feature-icon"></i>
-                    <h3>100% FSC Certified Wood</h3>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-tree feature-icon"></i>
+                    </div>
+                    <h3 class="stat-num" data-target="100" data-suffix="%">100% FSC Certified Wood</h3>
                     <p>We exclusively use 100% FSC certified wood, harvested from responsibly managed forests to ensure absolute environmental sustainability and premium quality.</p>
                 </div>
+
                 <div class="feature-card reveal">
-                    <i class="fas fa-tools feature-icon"></i>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-tools feature-icon"></i>
+                    </div>
                     <h3>Custom Designs</h3>
                     <p>Handmade customized furniture tailored specifically to your home and office requirements.</p>
                 </div>
+
                 <div class="feature-card reveal">
-                    <i class="fas fa-tags feature-icon"></i>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-tags feature-icon"></i>
+                    </div>
                     <h3>No Hidden Costs</h3>
                     <p>Transparent pricing from start to finish, ensuring you get maximum value for your investment.</p>
                 </div>
@@ -101,32 +202,196 @@
         </div>
     </section>
 
-    <!-- Featured Categories -->
-    <section class="bg-surface">
+    <!-- Featured Categories / Our Offerings -->
+    <section class="bg-travertine">
         <div class="container">
             <div class="text-center reveal">
-                <h2>Our Offerings</h2>
+                <span class="section-subtitle">Exquisite Portfolios</span>
+                <h2 class="section-title">Our Offerings</h2>
+                <div class="section-divider"></div>
                 <br>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/furniture-cat.jpg" -->
-                    <img src="images/bed_img.png" alt="Furniture">
+                <!-- Luxury Furniture Offering -->
+                <div class="gallery-item reveal" data-category="luxury-furniture">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-crown"></i> Bespoke Collection</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <img src="images/bed_img.png" alt="Furniture" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
                         <h3>Luxury Furniture</h3>
                         <p>Hotel, Restaurant, House, and Office</p>
-                        <br>
-                        <a href="furniture.html" class="btn">View Products</a>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Solid Hardwood</span>
+                            <a href="furniture.html" class="btn btn-sm btn-primary">View Products</a>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <!-- USER TO REPLACE IMAGE: src="images/handcraft-cat.jpg" -->
-                    <img src="images/handcraft_img.png" alt="Handcraft">
+
+                <!-- Handicrafts Offering -->
+                <div class="gallery-item reveal" data-category="handicraft">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-feather-alt"></i> Heritage Art</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <img src="images/handcraft_img.png" alt="Handicrafts" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-overlay">
-                        <h3>Handcrafts</h3>
+                        <h3>Handicrafts</h3>
                         <p>Unique artistic handmade wooden decor</p>
-                        <br>
-                        <a href="handcraft.html" class="btn">View Products</a>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-leaf"></i> Hand Carved</span>
+                            <a href="handicraft.html" class="btn btn-sm btn-primary">View Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact-section" class="bg-alabaster">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="section-subtitle">Reach Our Atelier</span>
+                <h2 class="section-title">Contact Us</h2>
+                <div class="section-divider"></div>
+                <p style="color: var(--color-text-muted); max-width: 620px; margin: 0 auto;">Have a custom furniture design in mind or want to explore our bespoke catalog? Send us a message or reach our Jaipur woodworking atelier directly.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Contact Information Column -->
+                <div class="contact-info reveal">
+                    <span class="section-subtitle">Direct Communication</span>
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.6rem;">Contact Information</h3>
+                    <div class="section-divider left" style="margin-bottom: 2rem;"></div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Our Location</h4>
+                            <p>1 Dahami Kalan, Bagru,<br>Jaipur, Rajasthan<br>Pin Code - 303007</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p><a href="tel:+919519766601">+91-9519766601</a></p>
+                            <p style="font-size: 0.85rem; margin-top: 0.3rem; color: var(--color-glow-green-bright); font-weight: 600;">
+                                <i class="fas fa-clock"></i> 24/7 Support Available
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p><a href="mailto:guruvashishtawoods@gmail.com">guruvashishtawoods@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon" style="background: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.3); color: #25D366;">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4>WhatsApp Chat</h4>
+                            <p><a href="https://wa.me/919519766601" target="_blank" rel="noopener noreferrer">+91-9519766601 (Instant Response)</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; gap: 1rem;">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Contact Form Column -->
+                <div class="contact-form-container reveal">
+                    <span class="section-subtitle">Custom Inquiry</span>
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.6rem;">Send Us a Message</h3>
+                    <div class="section-divider left" style="margin-bottom: 2rem;"></div>
+
+                    <form action="https://formsubmit.co/guruvashishtawoods@gmail.com" method="POST" id="homeContactForm">
+                        <!-- Anti-Bot Silent Honeypot & Configuration -->
+                        <input type="text" name="_honey" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://guruvashishtawoods.com/contact.html">
+                        <input type="hidden" name="_subject" value="New Website Inquiry - Guru Vashishta Woods">
+                        
+                        <div class="form-group">
+                            <label for="homeUserName">Full Name *</label>
+                            <input type="text" id="homeUserName" name="Name" class="form-control" placeholder="Your Name" maxlength="100" autocomplete="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="homeUserEmail">Email Address *</label>
+                            <input type="email" id="homeUserEmail" name="Email" class="form-control" placeholder="Your Email Address" maxlength="120" autocomplete="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="homeUserPhone">Phone Number *</label>
+                            <input type="tel" id="homeUserPhone" name="Phone" class="form-control" placeholder="Your Phone Number" maxlength="20" autocomplete="tel" pattern="[0-9+\-\s()]{7,20}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="homeUserMessage">Requirements Details *</label>
+                            <textarea id="homeUserMessage" name="Message" class="form-control" placeholder="Tell us about your requirements (furniture customization, bulk orders, etc.)" maxlength="3000" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Submit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisan Journey Process -->
+    <section class="bg-sage">
+        <div class="container text-center reveal">
+            <span class="section-subtitle">Heritage Technique</span>
+            <h2 class="section-title">The Artistry Process</h2>
+            <div class="section-divider"></div>
+            <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">From sustainably harvested FSC logs to hand-rubbed heirloom finishes.</p>
+            
+            <div class="artisan-journey">
+                <div class="journey-steps">
+                    <div class="journey-step reveal">
+                        <div class="journey-step-num">01</div>
+                        <h4>Sustainable Selection</h4>
+                        <p>Rigorous sourcing of 100% FSC certified, kiln-dried timber ensuring lasting dimensional stability.</p>
+                    </div>
+                    <div class="journey-step reveal">
+                        <div class="journey-step-num">02</div>
+                        <h4>In-House Joinery</h4>
+                        <p>Time-tested mortise & tenon interlocking joints engineered to last generations without compromise.</p>
+                    </div>
+                    <div class="journey-step reveal">
+                        <div class="journey-step-num">03</div>
+                        <h4>Artisan Hand Carving</h4>
+                        <p>Master Rajasthani craftsmen detail each curvature, bevel, and silhouette with meticulous precision.</p>
+                    </div>
+                    <div class="journey-step reveal">
+                        <div class="journey-step-num">04</div>
+                        <h4>Natural Finishing</h4>
+                        <p>Non-toxic natural oils, stains, and hand-rubbed waxes that accentuate the organic wood grain.</p>
                     </div>
                 </div>
             </div>
@@ -138,38 +403,40 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo"></a>
-                    <p style="color: var(--color-text-muted); max-width: 300px;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo">
+                    </a>
+                    <p style="color: var(--color-text-muted); max-width: 320px; font-size: 0.95rem; line-height: 1.7;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About Us</a>
-                        <a href="furniture.html">Furniture</a>
-                        <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                        <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="handicraft.html"><i class="fas fa-chevron-right"></i> Handicraft</a>
+                        <a href="furniture.html"><i class="fas fa-chevron-right"></i> Furniture</a>
+                        <a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="contact.html"><i class="fas fa-chevron-right"></i> Reach Us</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
                     <div class="footer-links">
-                        <a href="furniture.html">Living Room</a>
-                        <a href="furniture.html">Bedroom</a>
-                        <a href="furniture.html">Office</a>
-                        <a href="furniture.html">Dining</a>
+                        <a href="furniture.html"><i class="fas fa-couch"></i> Living Room</a>
+                        <a href="furniture.html"><i class="fas fa-bed"></i> Bedroom</a>
+                        <a href="furniture.html"><i class="fas fa-briefcase"></i> Office</a>
+                        <a href="furniture.html"><i class="fas fa-utensils"></i> Dining</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <div class="footer-links">
-                        <a href="tel:+919519466611"><i class="fas fa-phone"></i> +91-9519466611</a>
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
                         <a href="mailto:guruvashishtawoods@gmail.com"><i class="fas fa-envelope"></i> guruvashishtawoods@gmail.com</a>
                         <a href="#"><i class="fas fa-map-marker-alt"></i> 1 Dahami Kalan, Bagru, Jaipur Pin Code - 303007</a>
                     </div>
@@ -180,6 +447,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20inquire%20about%20your%20bespoke%20furniture%20manufacturing." 
+       class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-tooltip">Chat with Artisan &bull; Jaipur</span>
+        <div class="whatsapp-pulse-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 
     <script src="js/main.js"></script>
 </body>

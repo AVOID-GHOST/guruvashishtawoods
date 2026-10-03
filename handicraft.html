@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Handicrafts | Guru Vashishta Woods</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Security & Privacy Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://wa.me; frame-ancestors 'none'; form-action 'self' https://formsubmit.co;">
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="Guru Vashishta Woods Home">
+                <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="handicraft.html" class="active">Handicraft</a>
+                <a href="furniture.html">Furniture</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Reach Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container reveal">
+            <div class="brand-badge">
+                <i class="fas fa-feather-alt"></i> Artistic Decor
+            </div>
+            <h1 class="hero-title" style="font-size: 3rem;">Exquisite <span>Handicrafts</span></h1>
+            <p style="color: var(--color-leaf-light); letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Artistry in Every Detail</p>
+        </div>
+    </div>
+
+    <!-- Handicraft Gallery -->
+    <section class="bg-alabaster">
+        <div class="container">
+            
+            <!-- Dynamic Catalog Toolbar -->
+            <div class="catalog-toolbar reveal">
+                <div class="filter-pills">
+                    <button class="filter-btn active" data-filter="all"><i class="fas fa-th-large"></i> All Handicrafts</button>
+                    <button class="filter-btn" data-filter="decor"><i class="fas fa-paint-brush"></i> Decor & Art</button>
+                    <button class="filter-btn" data-filter="kitchen"><i class="fas fa-utensil-spoon"></i> Kitchen & Board</button>
+                </div>
+                
+                <div class="search-box-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Search handicraft decor...">
+                </div>
+
+                <div class="search-count-badge">
+                    <span id="productCount">3</span> Masterpieces Available
+                </div>
+            </div>
+
+            <div class="gallery-grid">
+                
+                <!-- Item 1: Vintage End-Grain Cutting Boards -->
+                <div class="gallery-item reveal" data-category="kitchen decor">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-utensil-spoon"></i> Kitchen & Culinary</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Vintage%20End-Grain%20Cutting%20Boards." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/cutting_boards.png" alt="End-Grain Cutting Boards" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Vintage End-Grain Cutting Boards</h3>
+                        <p>Hand-carved premium decor</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-tree"></i> Self-Healing End Grain</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Wall Decor -->
+                <div class="gallery-item reveal" data-category="decor">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-feather-alt"></i> Wall Artistry</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Wall%20Decor." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/handcraft_img.png" alt="Wooden Decor" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Wall Decor</h3>
+                        <p>Artistic wooden wall hangings</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-paint-brush"></i> Hand-Carved Relief</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Antique Mirror Frame -->
+                <div class="gallery-item reveal" data-category="decor">
+                    <div class="gallery-image-container">
+                        <span class="gallery-badge"><i class="fas fa-gem"></i> Heritage Mirror</span>
+                        <div class="gallery-quick-actions">
+                            <button class="action-circle-btn btn-quick-view" aria-label="Quick View"><i class="fas fa-eye"></i></button>
+                            <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20am%20interested%20in%20the%20Antique%20Mirror%20Frame." target="_blank" rel="noopener noreferrer" class="action-circle-btn" aria-label="WhatsApp Inquiry"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <img src="images/walnut_board.png" alt="Walnut Cutting Board" loading="lazy" decoding="async">
+                    </div>
+                    <div class="gallery-overlay">
+                        <h3>Antique Mirror Frame</h3>
+                        <p>Detailed artisan craftsmanship</p>
+                        <div class="gallery-card-footer">
+                            <span class="wood-tag"><i class="fas fa-crown"></i> Solid Wood Frame</span>
+                            <button class="btn btn-sm btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Inquire Callout -->
+            <div class="text-center reveal bg-travertine" style="margin-top: 5rem; padding: 3.5rem 2rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                <span class="section-subtitle">Artisan Collections</span>
+                <p style="margin-bottom: 2rem; font-size: 1.15rem; max-width: 700px; margin-left: auto; margin-right: auto;">Explore our unique collection of handmade wooden handicrafts to add an elegant touch to your spaces.</p>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Inquire Now
+                    </a>
+                    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20inquire%20about%20your%20handmade%20wooden%20crafts." target="_blank" rel="noopener noreferrer" class="btn">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Inquire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo">
+                    </a>
+                    <p style="color: var(--color-text-muted); max-width: 320px; font-size: 0.95rem; line-height: 1.7;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="handicraft.html"><i class="fas fa-chevron-right"></i> Handicraft</a>
+                        <a href="furniture.html"><i class="fas fa-chevron-right"></i> Furniture</a>
+                        <a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="contact.html"><i class="fas fa-chevron-right"></i> Reach Us</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <div class="footer-links">
+                        <a href="furniture.html"><i class="fas fa-couch"></i> Living Room</a>
+                        <a href="furniture.html"><i class="fas fa-bed"></i> Bedroom</a>
+                        <a href="furniture.html"><i class="fas fa-briefcase"></i> Office</a>
+                        <a href="furniture.html"><i class="fas fa-utensils"></i> Dining</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <div class="footer-links">
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
+                        <a href="mailto:guruvashishtawoods@gmail.com"><i class="fas fa-envelope"></i> guruvashishtawoods@gmail.com</a>
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> 1 Dahami Kalan, Bagru, Jaipur Pin Code - 303007</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Guru Vashishta Woods Private Limited All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20inquire%20about%20your%20wooden%20handicrafts." 
+       class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-tooltip">Chat with Artisan &bull; Jaipur</span>
+        <div class="whatsapp-pulse-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

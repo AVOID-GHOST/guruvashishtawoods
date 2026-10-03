@@ -2,12 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>About Us | Guru Vashishta Woods</title>
     <link rel="icon" type="image/png" href="images/logo.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Security & Privacy Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://wa.me; frame-ancestors 'none'; form-action 'self' https://formsubmit.co;">
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,16 +28,18 @@
     <!-- Header -->
     <header class="scrolled">
         <div class="container nav-container">
-            <a href="index.html" class="logo"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo"></a>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo" aria-label="Guru Vashishta Woods Home">
+                <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="about.html" class="active">About Us</a>
+                <a href="handicraft.html">Handicraft</a>
                 <a href="furniture.html">Furniture</a>
-                <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                <a href="about.html" class="active">About Us</a>
+                <a href="contact.html">Reach Us</a>
             </nav>
         </div>
     </header>
@@ -32,48 +47,73 @@
     <!-- Page Header -->
     <div class="page-header">
         <div class="container reveal">
+            <div class="brand-badge">
+                <i class="fas fa-leaf"></i> Heritage & Philosophy
+            </div>
             <h1 class="hero-title" style="font-size: 3rem;">About <span>Our Company</span></h1>
-            <p style="color: var(--color-primary); letter-spacing: 2px; text-transform: uppercase;">Mastering the Art of Wood</p>
+            <p style="color: var(--color-leaf-light); letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">Mastering the Art of Wood</p>
         </div>
     </div>
 
     <!-- About Content -->
-    <section>
+    <section class="bg-alabaster">
         <div class="container about-grid">
             <div class="about-text reveal">
+                <span class="section-subtitle">Heritage Craftsmanship</span>
                 <h2>Our Story & Vision</h2>
+                <div class="section-divider left"></div>
                 <p>Guru Vashishta Woods Pvt. Ltd is a renowned home and office furniture company, specializing in handmade crafts and fully customized solutions. Located in the heart of Jaipur, Rajasthan, we bring the rich heritage of Indian craftsmanship to modern luxury living.</p>
-                <br>
                 <p>We work tirelessly to provide handmade, customized furniture tailored to the specific requirements of your home or office space. Our vision is to create and design world-class furniture by working artistically, reducing costs, and continually improving our services.</p>
-                <br>
                 <p>We justify our business by adding tremendous value to our designs for our esteemed customers, ensuring that every piece of furniture we craft tells a story of luxury, durability, and timeless elegance.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="furniture.html" class="btn btn-primary">
+                        <i class="fas fa-couch"></i> Explore Our Furniture
+                    </a>
+                </div>
             </div>
             <div class="about-image reveal">
-                <!-- USER TO REPLACE IMAGE: src="images/about-story.jpg" -->
-                <img src="images/office_img.png" alt="About Our Company">
+                <div class="about-image-wrapper">
+                    <img src="images/office_img.png" alt="About Our Company" loading="lazy" decoding="async">
+                </div>
+                <div class="about-image-backdrop"></div>
+                <div class="about-image-floating-badge">
+                    <div class="badge-icon"><i class="fas fa-tree"></i></div>
+                    <div class="badge-text">
+                        <h4>100% FSC Wood</h4>
+                        <p>Responsibly Harvested</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Leadership Section -->
-    <section>
+    <section class="bg-sage">
         <div class="container text-center reveal">
-            <h2>Our Directors</h2>
+            <span class="section-subtitle">Guiding Leadership</span>
+            <h2 class="section-title">Our Directors</h2>
+            <div class="section-divider"></div>
             <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Meet the visionary leaders behind Guru Vashishta Woods Private Limited.</p>
             
             <div class="team-grid">
                 <!-- Director 1 -->
                 <div class="team-card reveal">
+                    <div class="director-avatar-wrapper">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
                     <h3>Mr. Narottam Lal Sharma</h3>
                     <span class="role">Director</span>
                     <div class="team-contact">
-                        <a href="tel:+919519466611"><i class="fas fa-phone-alt"></i> +91-9519466611</a>
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
                         <a href="mailto:ntmbjtc@gmail.com"><i class="fas fa-envelope"></i> ntmbjtc@gmail.com</a>
                     </div>
                 </div>
 
                 <!-- Director 2 -->
                 <div class="team-card reveal">
+                    <div class="director-avatar-wrapper">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
                     <h3>Ms. Kiran Devi</h3>
                     <span class="role">Director</span>
                     <div class="team-contact">
@@ -85,23 +125,59 @@
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="bg-surface">
+    <!-- Commitment / Stats -->
+    <section class="bg-alabaster">
         <div class="container text-center reveal">
-            <h2>Our Commitment</h2>
+            <span class="section-subtitle">Artisan Promise</span>
+            <h2 class="section-title">Our Commitment</h2>
+            <div class="section-divider"></div>
             <br>
             <div class="features-grid">
-                <div class="feature-card">
-                    <h3 style="font-size: 3rem; color: var(--color-primary);">100%</h3>
-                    <p style="text-transform: uppercase; letter-spacing: 1px;">Expertise</p>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="100" data-suffix="%">100%</div>
+                    <div class="stat-label">Expertise</div>
+                    <p style="margin-top: 0.8rem; font-size: 0.88rem; color: var(--color-text-muted);">Decades of combined Rajasthani woodworking artistry and engineering acumen.</p>
                 </div>
-                <div class="feature-card">
-                    <h3 style="font-size: 3rem; color: var(--color-primary);">100%</h3>
-                    <p style="text-transform: uppercase; letter-spacing: 1px;">Quality Products</p>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="100" data-suffix="%">100%</div>
+                    <div class="stat-label">Quality Products</div>
+                    <p style="margin-top: 0.8rem; font-size: 0.88rem; color: var(--color-text-muted);">Kiln-dried seasoned hardwood crafted with heirloom mortise-and-tenon joints.</p>
                 </div>
-                <div class="feature-card">
-                    <h3 style="font-size: 3rem; color: var(--color-primary);">100%</h3>
-                    <p style="text-transform: uppercase; letter-spacing: 1px;">Help & Support</p>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="100" data-suffix="%">100%</div>
+                    <div class="stat-label">Help & Support</div>
+                    <p style="margin-top: 0.8rem; font-size: 0.88rem; color: var(--color-text-muted);">Dedicated direct artisan assistance from initial concept to safe final delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wood Species / Material Integrity -->
+    <section class="bg-travertine">
+        <div class="container text-center reveal">
+            <span class="section-subtitle">Natural Timber Grain</span>
+            <h2 class="section-title">Our Wood Library</h2>
+            <div class="section-divider"></div>
+            <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Select from our sustainably harvested, FSC-certified signature timber varieties.</p>
+
+            <div class="wood-showcase-grid">
+                <div class="wood-card reveal">
+                    <div class="wood-swatch-circle" style="background: radial-gradient(circle, #b8864e 30%, #7d4824 100%);"></div>
+                    <h4>100% FSC Teak Wood</h4>
+                    <span class="wood-botanical">Tectona grandis</span>
+                    <p>Natural water-resistant oils, dense golden grain, and unmatched longevity for luxury heirloom furnishings.</p>
+                </div>
+                <div class="wood-card reveal">
+                    <div class="wood-swatch-circle" style="background: radial-gradient(circle, #8f4625 25%, #421e0e 100%);"></div>
+                    <h4>Royal Indian Sheesham</h4>
+                    <span class="wood-botanical">Dalbergia sissoo</span>
+                    <p>Celebrated for its dramatic dark-and-light grain contrast, exceptional structural tensile strength, and royal charm.</p>
+                </div>
+                <div class="wood-card reveal">
+                    <div class="wood-swatch-circle" style="background: radial-gradient(circle, #5e3b23 30%, #29180c 100%);"></div>
+                    <h4>American Walnut</h4>
+                    <span class="wood-botanical">Juglans nigra</span>
+                    <p>Deep rich chocolate hues with satin-smooth tactile finishing, ideal for contemporary executive suites.</p>
                 </div>
             </div>
         </div>
@@ -112,38 +188,40 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo"></a>
-                    <p style="color: var(--color-text-muted); max-width: 300px;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: var(--color-primary); font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo">
+                    </a>
+                    <p style="color: var(--color-text-muted); max-width: 320px; font-size: 0.95rem; line-height: 1.7;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About Us</a>
-                        <a href="furniture.html">Furniture</a>
-                        <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                        <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="handicraft.html"><i class="fas fa-chevron-right"></i> Handicraft</a>
+                        <a href="furniture.html"><i class="fas fa-chevron-right"></i> Furniture</a>
+                        <a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="contact.html"><i class="fas fa-chevron-right"></i> Reach Us</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
                     <div class="footer-links">
-                        <a href="furniture.html">Living Room</a>
-                        <a href="furniture.html">Bedroom</a>
-                        <a href="furniture.html">Office</a>
-                        <a href="furniture.html">Dining</a>
+                        <a href="furniture.html"><i class="fas fa-couch"></i> Living Room</a>
+                        <a href="furniture.html"><i class="fas fa-bed"></i> Bedroom</a>
+                        <a href="furniture.html"><i class="fas fa-briefcase"></i> Office</a>
+                        <a href="furniture.html"><i class="fas fa-utensils"></i> Dining</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <div class="footer-links">
-                        <a href="tel:+919519466611"><i class="fas fa-phone"></i> +91-9519466611</a>
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
                         <a href="mailto:guruvashishtawoods@gmail.com"><i class="fas fa-envelope"></i> guruvashishtawoods@gmail.com</a>
                         <a href="#"><i class="fas fa-map-marker-alt"></i> 1 Dahami Kalan, Bagru, Jaipur Pin Code - 303007</a>
                     </div>
@@ -154,6 +232,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20company%20and%20craftsmanship." 
+       class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-tooltip">Chat with Artisan &bull; Jaipur</span>
+        <div class="whatsapp-pulse-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 
     <script src="js/main.js"></script>
 </body>
