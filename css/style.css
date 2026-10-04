@@ -95,6 +95,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 body {
@@ -103,7 +106,9 @@ body {
   color: var(--color-text);
   line-height: 1.7;
   overflow-x: hidden;
+  max-width: 100%;
   width: 100%;
+  position: relative;
   background-image: 
     linear-gradient(180deg, rgba(251, 249, 245, 0.92) 0%, rgba(247, 244, 238, 0.96) 100%),
     url('../images/hero_bg_light.jpg');
@@ -189,7 +194,7 @@ header.scrolled {
     transform: translateX(-50%);
     width: calc(100% - 4.5rem);
     max-width: 1260px;
-    padding: 0.85rem 2.5rem;
+    padding: 0.75rem 2.5rem;
     border-radius: var(--radius-pill);
     background: rgba(14, 23, 16, 0.48);
     backdrop-filter: blur(26px);
@@ -201,9 +206,14 @@ header.scrolled {
       inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
+  header .container {
+    padding: 0;
+    max-width: 100%;
+  }
+
   header.scrolled {
     top: 0.85rem;
-    padding: 0.65rem 2.2rem;
+    padding: 0.55rem 2.2rem;
     background: rgba(14, 23, 16, 0.62);
     border-color: rgba(74, 222, 128, 0.38);
     box-shadow: 
@@ -220,9 +230,9 @@ header.scrolled {
 }
 
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  line-height: 1;
   transition: transform var(--transition-fast);
 }
 
@@ -232,7 +242,7 @@ header.scrolled {
 
 /* Site Logo - Razor-sharp Vector & True to Brand */
 .site-logo {
-  height: 56px;
+  height: 52px;
   width: auto;
   max-width: 320px;
   object-fit: contain;
@@ -241,7 +251,7 @@ header.scrolled {
 }
 
 header.scrolled .site-logo {
-  height: 48px;
+  height: 44px;
   max-width: 280px;
 }
 
@@ -249,6 +259,13 @@ header.scrolled .site-logo {
   display: flex;
   align-items: center;
   gap: 2.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
@@ -259,6 +276,9 @@ header.scrolled .site-logo {
   letter-spacing: 1.8px;
   color: #e5ece6;
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   padding: 0.5rem 0;
   transition: color var(--transition-fast);
 }
@@ -548,10 +568,11 @@ header.scrolled .site-logo {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 125%;
-  height: 135%;
-  background: radial-gradient(ellipse at center, rgba(56, 224, 123, 0.32) 0%, transparent 72%);
-  filter: blur(20px);
+  width: 105%;
+  max-width: 100%;
+  height: 125%;
+  background: radial-gradient(ellipse at center, rgba(56, 224, 123, 0.28) 0%, transparent 72%);
+  filter: blur(14px);
   z-index: -1;
   pointer-events: none;
 }
@@ -2081,16 +2102,20 @@ footer::before {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
+    transform: translateX(105%);
+    visibility: hidden;
+    pointer-events: none;
     width: 82%;
     max-width: 380px;
     height: 100vh;
     background: rgba(14, 23, 16, 0.98);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -2098,12 +2123,14 @@ footer::before {
     gap: 2rem;
     border-left: 1px solid var(--border-subtle);
     box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
-    transition: right var(--transition);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
     z-index: 1050;
   }
   
   .nav-links.active {
-    right: 0;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav-links a {
@@ -2398,3 +2425,20 @@ footer::before {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   Universal Horizontal Overflow Prevention (Zero Sideways Scroll)
+   ========================================================================== */
+html, body, header, section, footer, main, .container {
+  max-width: 100% !important;
+}
+
+body {
+  overflow-x: clip;
+}
+@supports not (overflow-x: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+

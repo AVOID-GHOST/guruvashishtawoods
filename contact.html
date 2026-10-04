@@ -2,12 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Contact Us | Guru Vashishta Woods</title>
-    <link rel="icon" type="image/png" href="images/logo.png">
+        <!-- Standard & Google Search Favicon Specifications (Square, Multi-DPI, 48px Multiple) -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- OpenGraph & Social Search Snippet Image -->
+    <meta property="og:image" content="https://guruvashishtawoods.com/images/favicon-512x512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Guru Vashishta Woods Monogram Emblem">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://guruvashishtawoods.com/images/favicon-512x512.png">
+
+    <!-- Schema.org Organization Structured Data for Google Search Result Logo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Guru Vashishta Woods Private Limited",
+      "url": "https://guruvashishtawoods.com",
+      "logo": "https://guruvashishtawoods.com/images/favicon-512x512.png",
+      "image": "https://guruvashishtawoods.com/images/favicon-512x512.png"
+    }
+    </script>
+
+    <!-- Security & Privacy Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://wa.me; frame-ancestors 'none'; form-action 'self' https://formsubmit.co;">
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome with Subresource Integrity (SRI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,16 +54,18 @@
     <!-- Header -->
     <header class="scrolled">
         <div class="container nav-container">
-            <a href="index.html" class="logo"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo"></a>
-            <button class="mobile-menu-btn">
+            <a href="index.html" class="logo" aria-label="Guru Vashishta Woods Home">
+                <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
+                <a href="handicraft.html">Handicraft</a>
                 <a href="furniture.html">Furniture</a>
-                <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html" class="active">Contact Us</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html" class="active">Reach Us</a>
             </nav>
         </div>
     </header>
@@ -32,63 +73,111 @@
     <!-- Page Header -->
     <div class="page-header">
         <div class="container reveal">
+            <div class="brand-badge">
+                <i class="fas fa-headset"></i> Dedicated Artisan Support
+            </div>
             <h1 class="hero-title" style="font-size: 3rem;">Get In <span>Touch</span></h1>
-            <p style="color: var(--color-primary); letter-spacing: 2px; text-transform: uppercase;">We are here to help</p>
+            <p style="color: var(--color-leaf-light); letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">We are here to help</p>
         </div>
     </div>
 
     <!-- Contact Section -->
-    <section>
+    <section class="bg-alabaster">
         <div class="container contact-grid">
             
+            <!-- Contact Information Column -->
             <div class="contact-info reveal">
+                <span class="section-subtitle">Reach Our Atelier</span>
                 <h2 style="margin-bottom: 2rem;">Contact Information</h2>
+                <div class="section-divider left" style="margin-bottom: 2.5rem;"></div>
                 
                 <div class="contact-info-item">
-                    <i class="fas fa-map-marker-alt" style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem; display: block;"></i>
-                    <h4>Our Location</h4>
-                    <p>1 Dahami Kalan, Bagru,<br>Jaipur, Rajasthan<br>Pin Code - 303007</p>
+                    <div class="contact-info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Our Location</h4>
+                        <p>1 Dahami Kalan, Bagru,<br>Jaipur, Rajasthan<br>Pin Code - 303007</p>
+                    </div>
                 </div>
                 
                 <div class="contact-info-item">
-                    <i class="fas fa-phone-alt" style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem; display: block;"></i>
-                    <h4>Call Us</h4>
-                    <p><a href="tel:+919519466611">+91-9519466611</a></p>
-                    <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--color-primary);">24/7 Support Available</p>
+                    <div class="contact-info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Call Us</h4>
+                        <p><a href="tel:+919519766601">+91-9519766601</a></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.3rem; color: var(--color-leaf); font-weight: 600;">
+                            <i class="fas fa-clock"></i> 24/7 Support Available
+                        </p>
+                    </div>
                 </div>
                 
                 <div class="contact-info-item">
-                    <i class="fas fa-envelope" style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem; display: block;"></i>
-                    <h4>Email Us</h4>
-                    <p><a href="mailto:guruvashishtawoods@gmail.com">guruvashishtawoods@gmail.com</a></p>
+                    <div class="contact-info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4>Email Us</h4>
+                        <p><a href="mailto:guruvashishtawoods@gmail.com">guruvashishtawoods@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-info-icon" style="background: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.3); color: #25D366;">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h4>WhatsApp Chat</h4>
+                        <p><a href="https://wa.me/919519766601" target="_blank" rel="noopener noreferrer">+91-9519766601 (Instant Response)</a></p>
+                    </div>
                 </div>
                 
-                <div class="social-links" style="margin-top: 3rem;">
-                    <a href="#" style="color: var(--color-text); margin-right: 1.5rem; font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" style="color: var(--color-text); margin-right: 1.5rem; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color: var(--color-text); margin-right: 1.5rem; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
-                    <a href="#" style="color: var(--color-text); font-size: 1.5rem;"><i class="fab fa-linkedin-in"></i></a>
+                <div class="social-links" style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, 0.08); display: flex; gap: 1rem;">
+                    <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             
-            <div class="contact-form-container reveal" style="background-color: var(--color-surface); padding: 3rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05);">
+            <!-- Contact Form Column -->
+            <div class="contact-form-container reveal">
+                <span class="section-subtitle">Custom Inquiry</span>
                 <h2 style="margin-bottom: 2rem;">Send Us a Message</h2>
+                <div class="section-divider left" style="margin-bottom: 2.5rem;"></div>
+
                 <form action="https://formsubmit.co/guruvashishtawoods@gmail.com" method="POST" id="contactForm">
+                    <!-- Anti-Bot Honeypot -->
+                    <input type="text" name="_honey" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_next" value="https://guruvashishtawoods.com/contact.html">
+                    <input type="hidden" name="_subject" value="New Furniture Inquiry - Guru Vashishta Woods">
+                    
                     <div class="form-group">
-                        <input type="text" name="Name" class="form-control" placeholder="Your Name" required>
+                        <label for="userName">Full Name *</label>
+                        <input type="text" id="userName" name="Name" class="form-control" placeholder="Your Name" required maxlength="100" autocomplete="name">
                     </div>
+                    
                     <div class="form-group">
-                        <input type="email" name="Email" class="form-control" placeholder="Your Email Address" required>
+                        <label for="userEmail">Email Address *</label>
+                        <input type="email" id="userEmail" name="Email" class="form-control" placeholder="Your Email Address" required maxlength="100" autocomplete="email">
                     </div>
+                    
                     <div class="form-group">
-                        <input type="tel" name="Phone" class="form-control" placeholder="Your Phone Number" required>
+                        <label for="userPhone">Phone Number *</label>
+                        <input type="tel" id="userPhone" name="Phone" class="form-control" placeholder="Your Phone Number" required maxlength="20" autocomplete="tel" pattern="[\+]?[0-9\s\-()]{7,20}">
                     </div>
+                    
                     <div class="form-group">
-                        <textarea name="Message" class="form-control" placeholder="Tell us about your requirements (furniture customization, bulk orders, etc.)" required></textarea>
+                        <label for="userMessage">Requirements Details *</label>
+                        <textarea id="userMessage" name="Message" class="form-control" placeholder="Tell us about your requirements (furniture customization, bulk orders, etc.)" required maxlength="2000"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
                 </form>
             </div>
             
@@ -100,32 +189,40 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html"><img src="images/logo.png" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo"></a>
-                    <p style="color: var(--color-text-muted); max-width: 300px;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="Guru Vashishta Woods Private Limited" class="site-logo footer-logo">
+                    </a>
+                    <p style="color: var(--color-text-muted); max-width: 320px; font-size: 0.95rem; line-height: 1.7;">To create and design world-class furniture by working artistically, reducing costs, and improving services.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About Us</a>
-                        <a href="furniture.html">Furniture</a>
-                        <a href="handcraft.html">Handcraft</a>
-                <a href="contact.html">Contact Us</a>
+                        <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                        <a href="handicraft.html"><i class="fas fa-chevron-right"></i> Handicraft</a>
+                        <a href="furniture.html"><i class="fas fa-chevron-right"></i> Furniture</a>
+                        <a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                        <a href="contact.html"><i class="fas fa-chevron-right"></i> Reach Us</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Categories</h4>
                     <div class="footer-links">
-                        <a href="furniture.html">Living Room</a>
-                        <a href="furniture.html">Bedroom</a>
-                        <a href="furniture.html">Office</a>
-                        <a href="furniture.html">Dining</a>
+                        <a href="furniture.html"><i class="fas fa-couch"></i> Living Room</a>
+                        <a href="furniture.html"><i class="fas fa-bed"></i> Bedroom</a>
+                        <a href="furniture.html"><i class="fas fa-briefcase"></i> Office</a>
+                        <a href="furniture.html"><i class="fas fa-utensils"></i> Dining</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <div class="footer-links">
-                        <a href="tel:+919519466611"><i class="fas fa-phone"></i> +91-9519466611</a>
+                        <a href="tel:+919519766601"><i class="fas fa-phone-alt"></i> +91-9519766601</a>
                         <a href="mailto:guruvashishtawoods@gmail.com"><i class="fas fa-envelope"></i> guruvashishtawoods@gmail.com</a>
                         <a href="#"><i class="fas fa-map-marker-alt"></i> 1 Dahami Kalan, Bagru, Jaipur Pin Code - 303007</a>
                     </div>
@@ -136,6 +233,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <a href="https://wa.me/919519766601?text=Hello%20Guru%20Vashishta%20Woods%2C%20I%20would%20like%20to%20get%20in%20touch." 
+       class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <span class="whatsapp-tooltip">Chat with Artisan &bull; Jaipur</span>
+        <div class="whatsapp-pulse-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 
     <script src="js/main.js"></script>
 </body>
