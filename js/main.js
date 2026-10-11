@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initAnimatedCounters();
     initCatalogFilterAndSearch();
+    initHorizontalSliders();
     initQuickViewModal();
     initConfigurator();
     initBackToTop();
@@ -18,23 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Header & Mobile Navigation
+   Header & Mobile Navigation (90fps rAF-Synchronized Scroll State)
    ========================================================================== */
 function initHeaderAndNav() {
     const header = document.querySelector('header');
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
-    // Header scroll background toggle
-    const handleScroll = () => {
-        if (window.scrollY > 40) {
-            header?.classList.add('scrolled');
-        } else {
-            header?.classList.remove('scrolled');
+    // High-refresh-rate (90fps/120fps) rAF scroll state guard
+    let isScrolled = null;
+    let scrollTicking = false;
+
+    const updateHeaderState = () => {
+        const shouldBeScrolled = window.scrollY > 40;
+        if (shouldBeScrolled !== isScrolled) {
+            isScrolled = shouldBeScrolled;
+            if (isScrolled) {
+                header?.classList.add('scrolled');
+            } else {
+                header?.classList.remove('scrolled');
+            }
         }
+        scrollTicking = false;
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            requestAnimationFrame(updateHeaderState);
+        }
+    }, { passive: true });
+    updateHeaderState();
 
     // Mobile drawer toggle
     if (mobileBtn && navLinks) {
@@ -70,7 +85,7 @@ function initHeaderAndNav() {
 
         // Close on window resize if expanded past mobile breakpoint
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+            if (window.innerWidth > 991 && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 const icon = mobileBtn.querySelector('i');
                 if (icon) icon.className = 'fas fa-bars';
@@ -97,8 +112,8 @@ function initScrollReveal() {
             });
         }, {
             root: null,
-            rootMargin: '0px 0px -60px 0px',
-            threshold: 0.15
+            rootMargin: '0px 0px -40px 0px',
+            threshold: 0.1
         });
 
         reveals.forEach(el => observer.observe(el));
@@ -153,6 +168,63 @@ function initAnimatedCounters() {
 }
 
 /* ==========================================================================
+   Smooth 90fps Horizontal Sliders (.filter-pills, .hero-categories-grid, .hero-trust-bar)
+   ========================================================================== */
+function initHorizontalSliders() {
+    const sliders = document.querySelectorAll('.filter-pills, .hero-categories-grid, .hero-trust-bar');
+    if (!sliders.length) return;
+
+    sliders.forEach(slider => {
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let hasDragged = false;
+
+        // Pointer / mouse drag support for desktop & hybrid devices (touch uses native 90fps momentum)
+        slider.addEventListener('mousedown', (e) => {
+            if (slider.scrollWidth <= slider.clientWidth) return;
+            isDown = true;
+            hasDragged = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            slider.style.cursor = 'grabbing';
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            if (!isDown) return;
+            isDown = false;
+            slider.style.cursor = '';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            if (!isDown) return;
+            isDown = false;
+            slider.style.cursor = '';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            if (Math.abs(walk) > 5) {
+                hasDragged = true;
+                e.preventDefault();
+                slider.scrollLeft = scrollLeft - walk;
+            }
+        });
+
+        // Prevent accidental click trigger after mouse drag
+        slider.addEventListener('click', (e) => {
+            if (hasDragged) {
+                e.preventDefault();
+                e.stopPropagation();
+                hasDragged = false;
+            }
+        }, true);
+    });
+}
+
+/* ==========================================================================
    Live Search & Dynamic Category Filter for Products / Gallery
    ========================================================================== */
 function initCatalogFilterAndSearch() {
@@ -168,6 +240,8 @@ function initCatalogFilterAndSearch() {
 
     const applyFilters = () => {
         let visibleCount = 0;
+        const toShow = [];
+        const toHide = [];
 
         galleryItems.forEach(item => {
             const itemCat = (item.getAttribute('data-category') || '').toLowerCase();
@@ -179,24 +253,34 @@ function initCatalogFilterAndSearch() {
             const matchesSearch = !searchQuery || itemText.includes(searchQuery);
 
             if (matchesCategory && matchesSearch) {
-                item.style.display = '';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0) scale(1)';
-                }, 10);
+                toShow.push(item);
                 visibleCount++;
             } else {
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.96)';
-                setTimeout(() => {
-                    if (item.style.opacity === '0') item.style.display = 'none';
-                }, 300);
+                toHide.push(item);
             }
         });
 
-        if (countBadge) {
-            countBadge.innerText = `${visibleCount}`;
-        }
+        requestAnimationFrame(() => {
+            toShow.forEach(item => {
+                item.style.display = '';
+                requestAnimationFrame(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translate3d(0, 0, 0) scale(1)';
+                });
+            });
+
+            toHide.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translate3d(0, 0, 0) scale(0.96)';
+                setTimeout(() => {
+                    if (item.style.opacity === '0') item.style.display = 'none';
+                }, 260);
+            });
+
+            if (countBadge) {
+                countBadge.innerText = `${visibleCount}`;
+            }
+        });
     };
 
     filterBtns.forEach(btn => {
@@ -204,6 +288,17 @@ function initCatalogFilterAndSearch() {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeCategory = btn.getAttribute('data-filter') || 'all';
+
+            // Smoothly center the tapped category pill inside the horizontal slider on mobile
+            const pillContainer = btn.closest('.filter-pills');
+            if (pillContainer && pillContainer.scrollWidth > pillContainer.clientWidth) {
+                const targetScroll = btn.offsetLeft - (pillContainer.clientWidth / 2) + (btn.offsetWidth / 2);
+                pillContainer.scrollTo({
+                    left: Math.max(0, targetScroll),
+                    behavior: 'smooth'
+                });
+            }
+
             applyFilters();
         });
     });
@@ -421,7 +516,7 @@ Please advise on timeline and quotation.`);
 }
 
 /* ==========================================================================
-   Back to Top Floating Button
+   Back to Top Floating Button (90fps rAF-Synchronized)
    ========================================================================== */
 function initBackToTop() {
     let btn = document.querySelector('.back-to-top');
@@ -433,11 +528,24 @@ function initBackToTop() {
         document.body.appendChild(btn);
     }
 
+    let isVisible = false;
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 350) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                const shouldShow = window.scrollY > 350;
+                if (shouldShow !== isVisible) {
+                    isVisible = shouldShow;
+                    if (isVisible) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+                ticking = false;
+            });
         }
     }, { passive: true });
 
@@ -538,16 +646,28 @@ function initFormSecurity() {
 }
 
 /* ==========================================================================
-   Hero Subtle Parallax Effect (Optimized with Passive Listener)
+   Hero Subtle Parallax Effect (90fps rAF-Synchronized, Desktop Only)
    ========================================================================== */
 function initParallax() {
     const heroBg = document.querySelector('.hero-bg');
     if (!heroBg) return;
 
+    // Skip JS parallax on mobile/touch viewports so native compositor scrolling stays locked at 90fps/120fps
+    if (window.matchMedia('(max-width: 991px), (prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    let parallaxTicking = false;
     window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (scrolled < window.innerHeight) {
-            heroBg.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0) scale(1.05)`;
+        if (!parallaxTicking) {
+            parallaxTicking = true;
+            requestAnimationFrame(() => {
+                const scrolled = window.scrollY;
+                if (scrolled < window.innerHeight) {
+                    heroBg.style.transform = `translate3d(0, ${(scrolled * 0.25).toFixed(1)}px, 0) scale(1.05)`;
+                }
+                parallaxTicking = false;
+            });
         }
     }, { passive: true });
 }
